@@ -7,6 +7,9 @@ import { messagesStore } from "../stores"
 export default observer(({ location }: PageProps) => {
   const [text, setText] = useState("")
   const addMessage = () => {
+    if (!text) {
+      return
+    }
     messagesStore.addMessage(text)
     setText("")
   }
