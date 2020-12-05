@@ -6,8 +6,8 @@
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby`,
-    siteUrl: `https://www.daihuo.com`,
+    title: `Gatsby Mobx Typescript.`,
+    siteUrl: `https://gatsby-mobx-typescript.dcalsky.vercel.app/`,
     description: `Blazing fast modern site generator for React`,
   },
   /* Your site config here */
