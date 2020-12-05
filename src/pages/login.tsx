@@ -1,23 +1,66 @@
-import { PageProps, navigate } from "gatsby"
+import { navigate } from "gatsby"
 import { observer } from "mobx-react-lite"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { userStore } from "../stores"
-import { Button } from "antd"
+import { Button, Form, Input, notification } from "antd"
+import "./login.less"
+import { useAsyncFn } from "react-use"
+import User from "../models/user"
+
+interface FormProps {
+  username: string
+  password: string
+}
+
 
 export default observer(() => {
-  if (userStore.user) {
-    return null
-  }
-  const onLogin = () => {
-    userStore.login()
-    navigate("/", {
-      replace: true
-    })
-  }
+  const [form] = Form.useForm<FormProps>()
+  const [loginState, onLogin] = useAsyncFn(async () => {
+    const values = form.getFieldsValue()
+    return await userStore.login(values.username, values.password)
+  }, [])
+
+  useEffect(() => {
+    if (loginState.error) {
+      notification.error({
+        message: "Login error",
+        description:
+          "Wrong username or wrong password!"
+      })
+    }
+  }, [loginState.error])
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Login Page</h1>
-      <Button onClick={onLogin}>Click me to login as a normal user</Button>
+    <div>
+      <h1 className="title">Login Page</h1>
+      <Form
+        form={form}
+        className="login-form"
+        name="basic"
+        initialValues={{ remember: true }}
+        onFinish={onLogin}
+      >
+        <Form.Item
+          label="Username"
+          name="username"
+          rules={[{ required: true, message: "Please input your username!" }]}
+        >
+          <Input placeholder="Username: admin" />
+        </Form.Item>
+
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password placeholder="Password: admin" />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" loading={loginState.loading}>
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   )
 })
