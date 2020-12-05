@@ -1,11 +1,9 @@
-import { navigate } from "gatsby"
 import { observer } from "mobx-react-lite"
 import React, { useEffect, useState } from "react"
 import { userStore } from "../stores"
 import { Button, Form, Input, notification } from "antd"
 import "./login.less"
 import { useAsyncFn } from "react-use"
-import User from "../models/user"
 
 interface FormProps {
   username: string
