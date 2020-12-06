@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite"
 import React, { useState } from "react"
 import { messagesStore } from "../stores"
 
-export default observer(({ location }: PageProps) => {
+export default observer(() => {
   const [text, setText] = useState("")
   const addMessage = () => {
     if (!text) {

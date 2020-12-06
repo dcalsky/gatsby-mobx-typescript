@@ -1,8 +1,8 @@
-import { Input, Button } from "antd"
-import React, { useState } from "react"
+import { Button } from "antd"
+import React from "react"
 import { messagesStore } from "../stores"
 
-export default function Demo() {
+export default function ClearPage() {
   return (
     <>
       <Button

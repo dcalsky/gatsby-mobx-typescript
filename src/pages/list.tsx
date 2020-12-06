@@ -1,8 +1,7 @@
-import { PageProps } from "gatsby"
 import React from "react"
 import { messagesStore } from "../stores"
 
-export default function Demo1(props: PageProps) {
+export default function ListPage() {
   const { messages } = messagesStore
   return (
     <>
