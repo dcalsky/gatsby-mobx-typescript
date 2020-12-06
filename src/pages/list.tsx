@@ -8,7 +8,7 @@ export default function ListPage() {
       {messages.length === 0 ? <p>Nothing to show</p> : null}
       <ul>
         {messages.map(message => (
-          <li>{message}</li>
+          <li key={message}>{message}</li>
         ))}
       </ul>
     </>
