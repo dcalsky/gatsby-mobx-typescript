@@ -1,17 +1,15 @@
 import {
   UserOutlined,
   LaptopOutlined,
-  NotificationOutlined,
-  DownloadOutlined,
   LoginOutlined, GithubOutlined
 } from "@ant-design/icons"
-import { Menu, Breadcrumb, Layout as ALayout, Button, Dropdown, Tooltip } from "antd"
+import { Menu, Layout as ALayout, Button, Dropdown, Tooltip } from "antd"
 import { Header, Content, Footer } from "antd/lib/layout/layout"
 import Sider from "antd/lib/layout/Sider"
 import SubMenu from "antd/lib/menu/SubMenu"
-import { Link, PageProps } from "gatsby"
+import { Link } from "gatsby"
 import { observer } from "mobx-react-lite"
-import React, { useState } from "react"
+import React, {} from "react"
 import { userStore } from "../stores"
 import "./layout.less"
 
@@ -28,11 +26,10 @@ const AccountMenu = observer(() => {
   )
 })
 
-export default observer(({ children }) => {
-  // const [collapsed, setCollapsed] = useState(false)
-  // const onCollapse = (collapsed: boolean) => {
-  //   setCollapsed(collapsed)
-  // }
+export default observer(({ children, path }: {
+  children: React.ReactNode,
+  path: string
+}) => {
   const user = userStore.user
   if (!user) {
     return null
@@ -40,16 +37,14 @@ export default observer(({ children }) => {
   return (
     <ALayout style={{ minHeight: "100vh" }}>
       <Sider
-        // collapsible
         breakpoint="lg"
         collapsedWidth="0"
-        // onCollapse={onCollapse}
         className="site-layout-background"
       >
         <Menu
           mode="inline"
           theme="dark"
-          defaultSelectedKeys={["/"]}
+          defaultSelectedKeys={[path]}
           defaultOpenKeys={["sub1"]}
           style={{ height: "100%", borderRight: 0 }}
         >
